@@ -1,8 +1,42 @@
+use std::env::args;
+use colored::Colorize;
+
 mod encode;
 mod decode;
 mod crack;
 
+
 fn main() {
+    let mode = args().nth(1).expect("No mode given (encode, decode, crack, test)");
+    assert!(mode == "encode" || mode == "decode" || mode == "crack" || mode == "test");
+    if mode != "test" {
+        let text = args().nth(2).expect("No text given");
+        if mode != "crack"  {
+            let key = args().nth(3).expect("No key was given").chars().nth(0).expect("The key should be one letter [a-z]");
+            if mode == "encode" {
+                println!("Encoding \"{}\" with the key \"{}\"",
+                         text.bold(),
+                         key.to_string().bold());
+                let encoded_text = encode::encode(&text, key);
+                println!("{}", encoded_text.bold());
+            } else if mode == "decode" {
+                println!("Decoding \"{}\" with the key \"{}\"",
+                         text.bold(),
+                         key.to_string().bold());
+                let decoded_text = decode::decode(&text, key);
+                println!("{}", decoded_text.bold());
+            }
+        } else {
+            println!("Cracking \"{}\"",
+                text.bold());
+
+            let cracked_text = crack::crack(&text);
+            println!("{}", cracked_text.bold());
+        }
+
+    } else {
+
+
     let key = 'z';
 
 
@@ -19,4 +53,5 @@ fn main() {
     let cracked_text = crack::crack(&ciphered_text);
     assert_eq!(clear_text, cracked_text);
     println!("Cracking is working!");
+    }
 }
