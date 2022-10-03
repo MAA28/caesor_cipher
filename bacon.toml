@@ -1,0 +1,21 @@
+
+default_job = "run"
+[jobs]
+
+[jobs.format]
+command = ["cargo", "fmt"]
+need_stdout = false
+on_success = "back" # so that we don't open the browser at each change
+ 
+[jobs.test]
+command = ["cargo", "build", "&&", "cargo", "test", "--color", "always"]
+need_stdout = true
+
+[jobs.run]
+command = ["cargo", "r", "--color", "always", "--", "--help"]
+need_stdout = true
+
+[keybindings]
+f = "job:format"
+t = "job:test"
+r = "job:run"
