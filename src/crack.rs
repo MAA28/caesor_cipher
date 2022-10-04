@@ -1,5 +1,4 @@
 use crate::decode::decode;
-use colored::Colorize;
 
 pub fn crack(ciphered_text: &String) -> String {
     let avg_dist = [
@@ -27,11 +26,7 @@ pub fn crack(ciphered_text: &String) -> String {
             .enumerate()
             .map(|(i, x)| (dist[(i + k) % 26] - x) * (dist[(i + k) % 26] - x));
         let cost: f64 = costs.sum();
-        println!(
-            "The letter {} has a cost of {}",
-            ((k as u8 + 97) as char).to_string().bold(),
-            cost.to_string().bold()
-        );
+       
 
         if cost < min_cost {
             min_cost = cost;
@@ -40,6 +35,5 @@ pub fn crack(ciphered_text: &String) -> String {
     }
 
     let solved_key = (best_key as u8 + 97) as char;
-    println!("Best key: {}", solved_key.to_string().bold());
     return decode(&ciphered_text, &solved_key);
 }

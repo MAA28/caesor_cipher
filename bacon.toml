@@ -1,6 +1,7 @@
 
 default_job = "run"
 [jobs]
+
 [jobs.test]
 command = ["cargo", "test", "--color", "always"]
 

@@ -26,12 +26,12 @@ pub enum Commands {
 #[derive(Args, Debug)]
 pub struct EncodeOptions {
     /// The text that is to be encoded. **Note: Only lowercase letters are excepted!**
-    #[arg(short = 't', long)]
+    #[arg(short = 't', long, required=true)]
     pub text: String,
 
     /// The key with which the text is to be encoded. **Note: This value needs to be one
     /// lowercase letter!**
-    #[arg(short = 'k', long)]
+    #[arg(short = 'k', long, required=true)]
     pub key: char,
 }
 

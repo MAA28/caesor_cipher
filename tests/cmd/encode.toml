@@ -1,0 +1,2 @@
+bin.name="caesor_cipher"
+args="encode -t abcdefghijklmnopqrstuvwxyz -k b"
