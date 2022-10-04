@@ -8,7 +8,7 @@ pub struct Cli {
 
     /// Output more information
     #[arg(short, long)]
-    pub verbose: bool
+    pub verbose: bool,
 }
 
 #[derive(Subcommand, Debug)]
